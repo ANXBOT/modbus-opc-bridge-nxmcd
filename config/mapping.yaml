@@ -1,0 +1,115 @@
+# Modbus to OPC UA Address Mapping Configuration
+# NXMCD Virtual Debugging
+#
+# modbus_type: coil | discrete_input | holding | input_register
+# data_type: Bool | Int16 | UInt16 | Int32 | Float | Double
+# count: number of registers (default 1, Float/Int32 needs 2)
+
+groups:
+  - name: SystemStatus
+    description: "系统状态信号"
+    items:
+      - tag: SYS_RUNNING
+        name: "系统运行"
+        modbus_type: coil
+        address: 0
+        data_type: Bool
+
+      - tag: SYS_ERROR
+        name: "系统故障"
+        modbus_type: coil
+        address: 1
+        data_type: Bool
+
+      - tag: SYS_ALARM
+        name: "系统报警"
+        modbus_type: coil
+        address: 2
+        data_type: Bool
+
+  - name: AxisControl
+    description: "轴控制信号"
+    items:
+      - tag: AXIS1_ENABLE
+        name: "轴1使能"
+        modbus_type: coil
+        address: 10
+        data_type: Bool
+
+      - tag: AXIS1_HOME
+        name: "轴1回零"
+        modbus_type: coil
+        address: 11
+        data_type: Bool
+
+      - tag: AXIS2_ENABLE
+        name: "轴2使能"
+        modbus_type: coil
+        address: 12
+        data_type: Bool
+
+      - tag: AXIS2_HOME
+        name: "轴2回零"
+        modbus_type: coil
+        address: 13
+        data_type: Bool
+
+  - name: AxisStatus
+    description: "轴状态反馈"
+    items:
+      - tag: AXIS1_POS
+        name: "轴1位置"
+        modbus_type: holding
+        address: 100
+        count: 2
+        data_type: Float
+
+      - tag: AXIS1_SPEED
+        name: "轴1速度"
+        modbus_type: holding
+        address: 102
+        count: 2
+        data_type: Float
+
+      - tag: AXIS2_POS
+        name: "轴2位置"
+        modbus_type: holding
+        address: 104
+        count: 2
+        data_type: Float
+
+      - tag: AXIS2_SPEED
+        name: "轴2速度"
+        modbus_type: holding
+        address: 106
+        count: 2
+        data_type: Float
+
+  - name: IOStatus
+    description: "IO状态"
+    items:
+      - tag: INPUT_STATUS
+        name: "输入状态"
+        modbus_type: discrete_input
+        address: 0
+        count: 16
+        data_type: Bool
+
+      - tag: OUTPUT_STATUS
+        name: "输出状态"
+        modbus_type: coil
+        address: 50
+        count: 16
+        data_type: Bool
+
+      - tag: ANALOG_INPUT1
+        name: "模拟输入1"
+        modbus_type: input_register
+        address: 0
+        data_type: UInt16
+
+      - tag: ANALOG_INPUT2
+        name: "模拟输入2"
+        modbus_type: input_register
+        address: 1
+        data_type: UInt16
